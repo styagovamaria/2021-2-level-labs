@@ -95,7 +95,7 @@ def create_report(unknown_profile: dict, profiles: list, languages: list) -> lis
     :param languages: a list of possible languages
     :return: a list of dictionaries with two keys – name, score
     """
-    pass
+    return
 
 
 def load_profile(path_to_file: str) -> dict or None:
