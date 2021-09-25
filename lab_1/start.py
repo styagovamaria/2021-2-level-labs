@@ -2,6 +2,8 @@
 Language detection starter
 """
 
+#изменение
+
 import os
 
 PATH_TO_LAB_FOLDER = os.path.dirname(os.path.abspath(__file__))

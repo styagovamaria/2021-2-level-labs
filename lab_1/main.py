@@ -2,7 +2,7 @@
 Lab 1
 Language detection
 """
-
+#изменение
 
 def tokenize(text: str) -> list or None:
     """
