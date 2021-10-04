@@ -17,7 +17,7 @@ def tokenize(text: str) -> list or None:
         return None
     invaluable_trash = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+',
                         '=', '{', '[', ']', '}', '|', '\\', ':', ';', '"', "'", '<', ',', '>',
-                        '.', '?', '/', '\t', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+                        '.', '?', '/', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
     text = text.lower()
     for symbols in invaluable_trash:
         text = text.replace(symbols, '')
@@ -201,8 +201,10 @@ def compare_profiles_advanced(unknown_profile: dict,
     return report
 
 
-
-def detect_language_advanced(unknown_profile: dict, profiles: list, languages: list, top_n: int) -> str or None:
+def detect_language_advanced(unknown_profile: dict,
+                             profiles: list,
+                             languages: list,
+                             top_n: int) -> str or None:
     """
     Detects the language of an unknown profile within the list of possible languages
     :param unknown_profile: a dictionary
@@ -211,7 +213,32 @@ def detect_language_advanced(unknown_profile: dict, profiles: list, languages: l
     :param top_n: a number of the most common words
     :return: a language
     """
-    return
+    if (not isinstance(unknown_profile, dict)
+            or not isinstance(profiles, list)
+            or not isinstance(languages, list)
+            or not isinstance(top_n, int)):
+        return None
+    # create the list of reports (they are dict) and sort the reports by score
+    reports = []
+    for profile in profiles:
+        if profile["name"] in languages or not languages:
+            report = compare_profiles_advanced(unknown_profile, profile, top_n)
+            reports.append(report)
+    reports = sorted(reports, key=lambda x: x["score"], reverse=True)
+    if not reports:
+        return None
+    # sort in alphabetically order if some languages have the same max scores
+    # create the list with only scores and count the max score-element in it
+    list_with_only_scores = []
+    for element_dict in reports:
+        list_with_only_scores.append(element_dict["score"])
+    max_scores = max(list_with_only_scores)
+    number_of_max_scores = list_with_only_scores.count(max_scores)
+    # use the count as a stop index to take the part of the 'reports' that we want to sort
+    reports = sorted(reports[:number_of_max_scores], key=lambda x: x["name"])
+    # return a language
+    return reports[0]["name"]
+# change for "this function is hard to read" and "return just here" is done
 
 
 def load_profile(path_to_file: str) -> dict or None:
@@ -220,7 +247,14 @@ def load_profile(path_to_file: str) -> dict or None:
     :param path_to_file: a path
     :return: a dictionary with three keys – name, freq, n_words
     """
-    pass
+    # check for bad input
+    if not isinstance(path_to_file, str) or not exists(path_to_file):
+        return None
+    # load profile from file
+    with open(path_to_file, "r", encoding="utf-8") as json_file:
+        profile = json.load(json_file)
+    return profile
+# change for "try/except" is done
 
 
 def save_profile(profile: dict) -> int:
@@ -229,4 +263,15 @@ def save_profile(profile: dict) -> int:
     :param profile: a dictionary
     :return: 0 if everything is ok, 1 if not
     """
-    pass
+    if not isinstance(profile, dict) or ("name" or "freq" or "n_words") not in profile.keys():
+        return 1
+    if (not isinstance(profile["name"], str)
+            or not isinstance(profile["freq"], dict)
+            or not isinstance(profile["n_words"], int)):
+        return 1
+    # generate file name from profile name
+    path_to_file = "{}.json".format(profile["name"])
+    # save profile in json file
+    with open(path_to_file, "w", encoding="utf-8") as file:
+        json.dump(profile, file)
+    return 0
