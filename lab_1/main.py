@@ -155,7 +155,6 @@ def detect_language(unknown_profile: dict,
         language_name = profile_2["name"]
     return language_name
 
-
 def compare_profiles_advanced(unknown_profile: dict,
                               profile_to_compare: dict,
                               top_n: int) -> dict or None:
@@ -199,7 +198,6 @@ def compare_profiles_advanced(unknown_profile: dict,
               'average_token_length': average_token_length,
               'sorted_common': sorted_common}
     return report
-
 
 def detect_language_advanced(unknown_profile: dict,
                              profiles: list,
