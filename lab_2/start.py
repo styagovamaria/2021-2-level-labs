@@ -89,7 +89,6 @@ if __name__ == '__main__':
 
     print(main.predict_language_knn(unknown_text_vector, known_text_vectors, language_labels, k, metric))
     
-
     EXPECTED = ['de', 'eng', 'lat']
     RESULT = ''
     # DO NOT REMOVE NEXT LINE - KEEP IT INTENTIONALLY LAST
