@@ -5,8 +5,6 @@ Language classification
 
 from lab_1.main import tokenize, remove_stop_words
 
-
-# 2
 import json
 
 
@@ -175,5 +173,3 @@ def predict_language_knn(unknown_text_vector: list, known_text_vectors: list, la
     for i in res:
         if i[1] == lbl:
             return [lbl, i[0]]
-
-
