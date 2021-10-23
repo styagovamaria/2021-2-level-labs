@@ -3,8 +3,6 @@ Lab 2
 Language classification
 """
 
-from lab_1.main import tokenize, remove_stop_words
-
 import json
 
 
@@ -77,7 +75,7 @@ def get_language_features(language_profiles: dict) -> list or None:
     return sorted(features)
 
 
-def get_text_vector(original_text: list, language_profiles: dict) -> list or None:
+def get_text_vector1(original_text: list, language_profiles: dict) -> list or None:
     if not isinstance(language_profiles, dict) or not isinstance(original_text, list):
         return None
 
@@ -93,7 +91,7 @@ def get_text_vector(original_text: list, language_profiles: dict) -> list or Non
     return text_vector
 
 
-def get_text_vector1(original_text: list, language_profiles: dict) -> list or None:
+def get_text_vector(original_text: list, language_profiles: dict) -> list or None:
     if not isinstance(language_profiles, dict) or not isinstance(original_text, list):
         return None
 
@@ -139,7 +137,8 @@ def calculate_distance_manhattan(unknown_text_vector: list, known_text_vector: l
     if not isinstance(known_text_vector, list) or not isinstance(unknown_text_vector, list):
         return None
     s = 0
-    for i in range(len(unknown_text_vector)):
+    #print(len(known_text_vector), len(unknown_text_vector))
+    for i in range(min(len(known_text_vector), len(unknown_text_vector))):
         s += abs(unknown_text_vector[i] - known_text_vector[i])
     return s
 
@@ -155,9 +154,9 @@ def predict_language_knn(unknown_text_vector: list, known_text_vectors: list, la
         else:
             calc = calculate_distance(unknown_text_vector, known_text_vectors[i])
         res.append([calc, language_labels[i]])
-    print(res)
+    #print(res)
     res = sorted(res, key=lambda x: x[0])[:k]
-    print(res)
+    #print(res)
 
     scores = dict()
     for i in res:
@@ -165,7 +164,7 @@ def predict_language_knn(unknown_text_vector: list, known_text_vectors: list, la
             scores[i[1]] += 1
         else:
             scores[i[1]] = 1
-    print(scores)
+    #print(scores)
     for i in scores:
         if scores[i] == max(scores.values()):
             lbl = i
