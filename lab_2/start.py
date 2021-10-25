@@ -13,9 +13,6 @@ PATH_TO_LAB_FOLDER = os.path.dirname(os.path.abspath(__file__))
 PATH_TO_PROFILES_FOLDER = os.path.join(PATH_TO_LAB_FOLDER, 'profiles')
 PATH_TO_DATASET_FOLDER = os.path.join(PATH_TO_LAB_FOLDER, 'dataset')
 
-
-# C:\\Users\\krichevskiy\\Downloads\\2021-2-level-labs-main\\2021-2-level-labs-main\\lab_2\\profiles
-
 if __name__ == '__main__':
 
     with open(os.path.join(PATH_TO_PROFILES_FOLDER, 'eng.txt'),
@@ -46,6 +43,7 @@ if __name__ == '__main__':
               'r', encoding='utf-8') as file_to_read:
         UNKNOWN_SAMPLES = file_to_read.read().split('[TEXT]')[1:]
 
+
     EXPECTED = ['de', 'eng', 'lat']
     RESULT = []
     STOP_WORDS = []
@@ -68,6 +66,7 @@ if __name__ == '__main__':
 
     # get known_text_vectors
     known_text_vectors = [main.get_text_vector(text, language_profiles) for text in known_text_corpus]
+    print(known_text_vectors)
     # work with unknown texts
     for unk_text in UNKNOWN_SAMPLES:
         # tokenize unknown text and remove stop words in it
@@ -79,6 +78,7 @@ if __name__ == '__main__':
                                                                    known_text_vectors,
                                                                    language_labels,
                                                                    KNN)
+        print(prediction_unknown_languages)
         # get language_labels_counts of unknown texts and check the result
         RESULT.append(prediction_unknown_languages[0])
     # DO NOT REMOVE NEXT LINE - KEEP IT INTENTIONALLY LAST
