@@ -1,7 +1,3 @@
-"""
-Lab 2
-Language classification
-"""
 
 import json
 
@@ -54,12 +50,26 @@ def get_freq_dict(tokens: list) -> dict or None:
             freq_dict[token] += 1/len(tokens)
         else:
             freq_dict[token] = 1/len(tokens)
+
+    for i in freq_dict:
+        freq_dict[i] = round(freq_dict[i], 5)
+
     return freq_dict
 
 
 def get_language_profiles(texts_corpus: list, language_labels: list) -> dict or None:
     if not isinstance(texts_corpus, list) or not isinstance(language_labels, list):
         return None
+
+    for i in texts_corpus:
+        for j in i:
+            if not isinstance(j, str):
+                return None
+
+    for i in language_labels:
+        if not isinstance(i, str):
+            return None
+
     profiles = dict()
     for i in range(len(language_labels)):
         profiles[language_labels[i]] = get_freq_dict(texts_corpus[i])
@@ -67,7 +77,7 @@ def get_language_profiles(texts_corpus: list, language_labels: list) -> dict or 
 
 
 def get_language_features(language_profiles: dict) -> list or None:
-    if not isinstance(language_profiles, dict):
+    if not isinstance(language_profiles, dict) or len(language_profiles) == 0:
         return None
     features = list()
     for profile in language_profiles:
@@ -109,17 +119,36 @@ def get_text_vector(original_text: list, language_profiles: dict) -> list or Non
 def calculate_distance(unknown_text_vector: list, known_text_vector: list) -> float or None:
     if not isinstance(known_text_vector, list) or not isinstance(unknown_text_vector, list):
         return None
+    
+    for i in unknown_text_vector:
+        if not isinstance(i, float):
+            return None
+    for i in known_text_vector:
+        if not isinstance(i, float):
+            return None
     s = 0
+
     for i in range(len(unknown_text_vector)):
         s += (unknown_text_vector[i] - known_text_vector[i]) ** 2
-    return s ** 0.5
+    return round(s ** 0.5, 5)
 
 
 def predict_language_score(unknown_text_vector: list, known_text_vectors: list, language_labels: list) -> [str, int]\
                                                                                                           or None:
     if not isinstance(known_text_vectors, list) or not isinstance(unknown_text_vector, list) or\
-            not isinstance(language_labels, list):
+            not isinstance(language_labels, list) or len(language_labels) != len(known_text_vectors):
         return None
+    for i in unknown_text_vector:
+        if not isinstance(i, float):
+            return None
+    for i in known_text_vectors:
+        for j in i:
+            if not isinstance(j, float):
+                return None
+    for i in language_labels:
+        if not isinstance(i, str):
+            return None
+
     best_result = 0
     label = ""
     for i in range(len(known_text_vectors)):
