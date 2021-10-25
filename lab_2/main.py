@@ -1,4 +1,4 @@
-
+# 2
 import json
 
 
@@ -62,6 +62,9 @@ def get_language_profiles(texts_corpus: list, language_labels: list) -> dict or 
         return None
 
     for i in texts_corpus:
+        if i is None:
+            return None
+
         for j in i:
             if not isinstance(j, str):
                 return None
@@ -119,13 +122,15 @@ def get_text_vector(original_text: list, language_profiles: dict) -> list or Non
 def calculate_distance(unknown_text_vector: list, known_text_vector: list) -> float or None:
     if not isinstance(known_text_vector, list) or not isinstance(unknown_text_vector, list):
         return None
-    
+
     for i in unknown_text_vector:
-        if not isinstance(i, float):
-            return None
+        if i != 0:
+            if not isinstance(i, float):
+                return None
     for i in known_text_vector:
-        if not isinstance(i, float):
-            return None
+        if i != 0:
+            if not isinstance(i, float):
+                return None
     s = 0
 
     for i in range(len(unknown_text_vector)):
