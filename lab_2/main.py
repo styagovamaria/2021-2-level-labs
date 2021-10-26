@@ -1,6 +1,7 @@
 # 2
 import json
 
+
 def tokenize(text: str) -> list or None:
     """
     Splits a text into tokens, converts the tokens into lowercase,
