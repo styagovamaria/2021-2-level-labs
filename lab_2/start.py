@@ -13,7 +13,6 @@ PATH_TO_LAB_FOLDER = os.path.dirname(os.path.abspath(__file__))
 PATH_TO_PROFILES_FOLDER = os.path.join(PATH_TO_LAB_FOLDER, 'profiles')
 PATH_TO_DATASET_FOLDER = os.path.join(PATH_TO_LAB_FOLDER, 'dataset')
 
-
 if __name__ == '__main__':
 
     with open(os.path.join(PATH_TO_PROFILES_FOLDER, 'eng.txt'),
