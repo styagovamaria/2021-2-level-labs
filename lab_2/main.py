@@ -1,6 +1,7 @@
 # 2
 import json
 
+
 def tokenize(text: str) -> list or None:
     """
     Splits a text into tokens, converts the tokens into lowercase,
@@ -171,6 +172,14 @@ def predict_language_score(unknown_text_vector: list, known_text_vectors: list, 
 def calculate_distance_manhattan(unknown_text_vector: list, known_text_vector: list) -> float or None:
     if not isinstance(known_text_vector, list) or not isinstance(unknown_text_vector, list):
         return None
+    for i in unknown_text_vector:
+        if i != 0:
+            if not isinstance(i, float):
+                return None
+    for i in known_text_vector:
+        if i != 0:
+            if not isinstance(i, float):
+                return None
     s = 0
     #print(len(known_text_vector), len(unknown_text_vector))
     for i in range(min(len(known_text_vector), len(unknown_text_vector))):
@@ -180,8 +189,18 @@ def calculate_distance_manhattan(unknown_text_vector: list, known_text_vector: l
 
 def predict_language_knn(unknown_text_vector: list, known_text_vectors: list, language_labels: list, k=1, metric='manhattan') -> [str, int] or None:
     if not isinstance(known_text_vectors, list) or not isinstance(unknown_text_vector, list) or \
-            not isinstance(language_labels, list):
+            not isinstance(language_labels, list) or len(known_text_vectors) != len(language_labels):
         return None
+    for i in unknown_text_vector:
+        if i != 0:
+            if not isinstance(i, float):
+                return None
+    for j in known_text_vectors:
+        for i in j:
+            if i != 0:
+                if not isinstance(i, float):
+                    return None
+
     res = list()
     for i in range(len(known_text_vectors)):
         if metric == 'manhattan':
@@ -189,6 +208,7 @@ def predict_language_knn(unknown_text_vector: list, known_text_vectors: list, la
         else:
             calc = calculate_distance(unknown_text_vector, known_text_vectors[i])
         res.append([calc, language_labels[i]])
+        #print([calc, language_labels[i]], i)
     #print(res)
     res = sorted(res, key=lambda x: x[0])[:k]
     #print(res)
