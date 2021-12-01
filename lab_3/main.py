@@ -5,7 +5,6 @@ Language classification using n-grams
 # print(list(map(int, input('?').split(' '))))
 import re
 
-
 class LetterStorage:
 
     def __init__(self):
