@@ -5,7 +5,7 @@ Tests for NGramTrie (log probabilities calculation)
 
 import unittest
 
-from lab_3.main import NGramTrie, \
+from main import NGramTrie, \
     LetterStorage, \
     encode_corpus, \
     tokenize_by_sentence

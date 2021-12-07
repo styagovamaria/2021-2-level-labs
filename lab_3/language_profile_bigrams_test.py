@@ -5,7 +5,7 @@ Tests for Language Profile (bi-grams)
 
 import unittest
 
-from lab_3.main import NGramTrie, LetterStorage, encode_corpus, LanguageProfile
+from main import NGramTrie, LetterStorage, encode_corpus, LanguageProfile
 
 
 class CreateLanguageProfileBiGramsTest(unittest.TestCase):

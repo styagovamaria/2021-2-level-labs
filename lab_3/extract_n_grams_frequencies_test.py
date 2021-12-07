@@ -5,7 +5,7 @@ Tests for NGramTrie (n-gram frequencies extraction)
 
 import unittest
 
-from lab_3.main import NGramTrie, LetterStorage
+from main import NGramTrie, LetterStorage
 
 
 class ExtractNgramFrequenciesTest(unittest.TestCase):
