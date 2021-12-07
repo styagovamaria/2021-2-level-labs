@@ -5,8 +5,8 @@ Tests BackOffGenerator class
 
 import unittest
 
-from lab_4.main import BackOffGenerator, LetterStorage, tokenize_by_letters, encode_corpus
-from lab_4.language_profile import LanguageProfile
+from main import BackOffGenerator, LetterStorage, tokenize_by_letters, encode_corpus
+from language_profile import LanguageProfile
 
 
 class BackOffGeneratorTest(unittest.TestCase):

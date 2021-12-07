@@ -5,8 +5,8 @@ Tests translate_to_plain_test function
 
 import unittest
 
-from lab_4.language_profile import LanguageProfile
-from lab_4.main import NGramTextGenerator, LetterStorage, tokenize_by_letters, decode_sentence, encode_corpus, translate_sentence_to_plain_text
+from language_profile import LanguageProfile
+from main import NGramTextGenerator, LetterStorage, tokenize_by_letters, decode_sentence, encode_corpus, translate_sentence_to_plain_text
 
 
 class TranslateToPlainTextTest(unittest.TestCase):

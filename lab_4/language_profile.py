@@ -5,7 +5,7 @@ Implements language profile class and supported functionality
 
 
 import json
-from lab_4.storage import Storage
+from storage import Storage
 
 
 class NGramTrie:
