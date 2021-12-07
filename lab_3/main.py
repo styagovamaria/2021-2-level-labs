@@ -32,6 +32,7 @@ def tokenize_by_sentence(text: str) -> tuple:
             a = a.replace(x, y)
         return a
 
+    
 
     text = text.replace('\r\n', ' ')
     text = text.replace('\n', ' ')
