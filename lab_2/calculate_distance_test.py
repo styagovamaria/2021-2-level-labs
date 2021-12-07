@@ -3,7 +3,7 @@ Checks the second lab calculating distance function
 """
 
 import unittest
-from lab_2.main import calculate_distance
+from main import calculate_distance
 
 
 class CalculateDistanceTest(unittest.TestCase):

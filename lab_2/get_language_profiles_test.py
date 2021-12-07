@@ -4,8 +4,8 @@ Checks the second lab getting language profiles function
 
 import unittest
 from mock import patch
-from lab_2.main import get_language_profiles
-from lab_2.main import get_freq_dict
+from main import get_language_profiles
+from main import get_freq_dict
 
 
 class GetLanguageProfilesTest(unittest.TestCase):
@@ -25,7 +25,7 @@ class GetLanguageProfilesTest(unittest.TestCase):
         actual = get_language_profiles(corpus, labels)
         self.assertEqual(expected, actual)
 
-    @patch('lab_2.main.get_freq_dict',
+    @patch('main.get_freq_dict',
            side_effect=get_freq_dict)
     def test_get_freq_dict_called(self, mock):
         """

@@ -3,7 +3,7 @@ Checks the second lab getting frequency dictionary function
 """
 
 import unittest
-from lab_2.main import get_freq_dict
+from main import get_freq_dict
 
 
 class GetFreqDictTest(unittest.TestCase):

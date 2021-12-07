@@ -4,7 +4,7 @@ Checks the first profile saving function
 """
 
 import unittest
-from lab_1.main import save_profile
+from main import save_profile
 
 
 class SaveProfileTest(unittest.TestCase):

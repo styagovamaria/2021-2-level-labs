@@ -4,8 +4,8 @@ Checks the second lab getting sparse vector function
 
 import unittest
 from mock import patch
-from lab_2.main import get_sparse_vector
-from lab_2.main import get_language_features
+from main import get_sparse_vector
+from main import get_language_features
 
 
 class GetSparseVectorTest(unittest.TestCase):
@@ -27,7 +27,7 @@ class GetSparseVectorTest(unittest.TestCase):
             self.assertIn(element, actual)
         self.assertEqual(len(actual), len(expected))
 
-    @patch('lab_2.main.get_language_features',
+    @patch('main.get_language_features',
            side_effect=get_language_features)
     def test_get_language_features_called(self, mock):
         """

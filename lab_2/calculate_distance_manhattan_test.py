@@ -3,7 +3,7 @@ Checks the second lab calculating distance manhattan function
 """
 
 import unittest
-from lab_2.main import calculate_distance_manhattan
+from main import calculate_distance_manhattan
 
 
 class CalculateDistanceManhattanTest(unittest.TestCase):
