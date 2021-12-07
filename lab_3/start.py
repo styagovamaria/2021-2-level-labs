@@ -5,6 +5,7 @@ Language detection starter
 import os
 PATH_TO_LAB_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
+
 if __name__ == '__main__':
     ENG_SAMPLE = "Helium is the byproduct of millennia of radioactive decay from the elements thorium and uranium."
     GERMAN_SAMPLE = "Zwei Begriffe, die nicht unbedingt zueinander passen, am Arbeitsplatz schon mal gar nicht."
