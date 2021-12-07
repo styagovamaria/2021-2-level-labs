@@ -19,7 +19,7 @@ def tokenize_by_sentence(text: str) -> tuple:
         'Ö': 'Oe',
         'Ü': 'Ue',
         'Ä': 'Ae',
-        'ß': 'ss',
+        #'ß': 'ss',
         'ẞ': 'Ss'
 
     }
@@ -40,9 +40,9 @@ def tokenize_by_sentence(text: str) -> tuple:
     # Break Sentences properly
     alltextstr = (text)  # list(map(normalize, f.readlines()))
     print('alltextstr', alltextstr)
-    sentences = re.split(r"[!.?]\W(?=[\wöüäßÜÖÄẞ])", alltextstr)
+    sentences = re.split(r"[!.?]\W(?=[\wöüäßÖÜÄẞ])", alltextstr)
 
-    sentences = re.split(r"[.!?]{1,3}[\s]{1,}(?=[\wßÜÖÄ^a-z^öüäß]{1})",
+    sentences = re.split(r"[.!?]{1,3}[\s]{1,}(?=[\wßÜÖÄ^a-zßöüä]{1})",
                          alltextstr)  # re.split(r"[!.?]\W(?=[\wöüäßÜÖÄẞ])", text)
     print('sentences', sentences)
     sentences = list(map(normalize, sentences))
@@ -90,43 +90,37 @@ def tokenize_by_sentence(text: str) -> tuple:
 
 
 
-
 class LetterStorage:
+    """
+    Stores and manages letters
+    """
 
     def __init__(self):
-        self.uid = 0
-        # self.storage = {'errors':0}
         self.storage = {}
-        self.errors = 0
-
-    def e(self, txt):
-        self.errors += 1
-        print('ERROR #', self.errors, txt)
-        return self.errors
+        self.counter = 1
 
     def _put_letter(self, letter: str) -> int:
-        if not type(letter) is str:
-            self.e('_put_letter')
-            print(letter)
+        """
+        Puts a letter into storage, assigns a unique id
+        :param letter: a letter
+        :return: 0 if succeeds, -1 if not
+        """
+        if not isinstance(letter, str):
             return -1
-
         if letter not in self.storage:
-            self.storage[letter] = self.uid
-            self.uid += 1
-            return 0
+            self.storage[letter] = self.counter
+            self.counter += 1
+        return 0
 
-        return self.storage[letter]
-
-    def get_id_by_letter(self, letter):
-         """
+    def get_id_by_letter(self, letter: str) -> int:
+        """
         Gets a unique id by a letter
         :param letter: a letter
         :return: an id
         """
-         if letter in self.storage:
-            return self.storage[letter]
-         else:
+        if not isinstance(letter, str) or letter not in self.storage:
             return -1
+        return self.storage[letter]
 
     def get_letter_by_id(self, letter_id: int) -> str or int:
         """
@@ -134,28 +128,37 @@ class LetterStorage:
         :param letter_id: a unique id
         :return: letter
         """
-        if not isinstance(letter_id, int) \
-                or letter_id not in self.storage.values():
+        storage_upside_down = dict(zip(self.storage.values(), self.storage.keys()))
+        if not isinstance(letter_id, int) or letter_id not in storage_upside_down:
             return -1
-        for letter, id_letter in self.storage.items():
-            if id_letter == letter_id:
-                return letter
-            
+        return storage_upside_down[letter_id]
 
-    def update(self, corpus):
-        ss = corpus
-        if type(ss) is not tuple:
-            self.e('update')
+    def update(self, corpus: tuple) -> int:
+        """
+        Fills a storage by letters from the corpus
+        :param corpus: a tuple of sentences
+        :return: 0 if succeeds, 1 if not
+        """
+        if not isinstance(corpus, tuple):
             return -1
-
-        uniques = {}
-        for sent in ss:
-            for word in sent:
+        for sentence in corpus:
+            for word in sentence:
                 for letter in word:
-
                     if self._put_letter(letter) == -1:
                         return -1
+        return 0
 
+    def update_string(self, text: str) -> int:
+        """
+        Fills a storage by letters from the glued_letters
+        :param text: a string with glued_letters
+        :return: 0 if succeeds, 1 if not
+        """
+        if not isinstance(text, str):
+            return -1
+        for letter in text:
+            if self._put_letter(letter) == -1:
+                return -1
         return 0
 
 
@@ -618,4 +621,42 @@ class LanguageProfile:
         profile_as_dict['name'] = self.language
         with open(name, 'w', encoding="UTF-8") as file:
             json.dump(profile_as_dict, file)
+        return 0
+
+
+    # 8
+    def open(self, file_name: str) -> int:
+        """
+        Opens language profile from json file and writes output to
+            self.language,
+            self.tries,
+            self.n_words fields.
+        :param file_name: name of the json file with .json format
+        :return: 0 if profile is opened, 1 if any errors occurred
+        """
+        if not isinstance(file_name, str):
+            return 1
+        with open(file_name, encoding="utf-8") as lang_profile_file:
+            profile_dict = json.load(lang_profile_file)
+        # task 1: name and n_words
+        self.language = profile_dict["name"]
+        self.n_words = profile_dict["n_words"]
+
+        self.tries = []
+
+        # task 3: fill the storage
+        for glued_letter in "".join(profile_dict["freq"]):
+            self.storage.update_string(glued_letter)
+
+        # task 2, 4, 5: get {2: {"ab": 1, "bd": 2}, 3: {"abc": 5, "cde": 6}}
+        tries_dict = {}
+        for n_gram, frequency in profile_dict["freq"].items():
+            if len(n_gram) not in tries_dict:
+                tries_dict[len(n_gram)] = {}
+            tries_dict[len(n_gram)][tuple(map(self.storage.get_id_by_letter, n_gram))] = frequency
+            # fill self.tries
+        for size, freq_dict in tries_dict.items():
+            trie = NGramTrie(size, self.storage)
+            trie.extract_n_grams_frequencies(freq_dict)
+            self.tries.append(trie)
         return 0
