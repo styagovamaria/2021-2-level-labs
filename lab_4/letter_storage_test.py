@@ -5,7 +5,7 @@ Tests LetterStorage class
 
 import unittest
 
-from lab_4.main import LetterStorage
+from main import LetterStorage
 
 
 class StorageTest(unittest.TestCase):

@@ -6,7 +6,7 @@ Tests PublicLanguageProfile class
 import unittest
 import os
 
-from lab_4.main import PublicLanguageProfile, LetterStorage, tokenize_by_letters, encode_corpus, decode_sentence
+from main import PublicLanguageProfile, LetterStorage, tokenize_by_letters, encode_corpus, decode_sentence
 
 CURRENT_DIR_PATH = os.path.dirname(__file__)
 PATH_TO_PROFILE = os.path.join(CURRENT_DIR_PATH, 'fi')

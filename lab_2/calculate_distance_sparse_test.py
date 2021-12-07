@@ -3,7 +3,7 @@ Checks the second lab calculating distance sparse function
 """
 
 import unittest
-from lab_2.main import calculate_distance_sparse
+from main import calculate_distance_sparse
 
 
 class CalculateDistanceSparseTest(unittest.TestCase):

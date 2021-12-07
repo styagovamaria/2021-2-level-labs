@@ -4,8 +4,8 @@ Language generation algorithm based on language profiles
 """
 
 from typing import Tuple
-from lab_4.storage import Storage
-from lab_4.language_profile import LanguageProfile
+from storage import Storage
+from language_profile import LanguageProfile
 
 
 # 4

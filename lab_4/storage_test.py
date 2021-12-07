@@ -6,7 +6,7 @@ Tests Storage class
 import unittest
 from unittest.mock import patch
 
-from lab_4.storage import Storage
+from storage import Storage
 
 
 class StorageTest(unittest.TestCase):
@@ -191,7 +191,7 @@ class StorageTest(unittest.TestCase):
         self.assertEqual(storage.storage, {})
         self.assertEqual(expected, actual)
 
-    @patch('lab_4.storage.Storage._put', side_effect=Storage()._put)
+    @patch('storage.Storage._put', side_effect=Storage()._put)
     def test_storage_update_calls_required_function(self, mock):
         """
         ideal case for update calling put_letter method

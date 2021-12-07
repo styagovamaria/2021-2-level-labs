@@ -5,8 +5,8 @@ Tests LikelihoodBasedTextGenerator class
 
 import unittest
 
-from lab_4.main import LikelihoodBasedTextGenerator, LetterStorage, tokenize_by_letters, encode_corpus, decode_sentence
-from lab_4.language_profile import LanguageProfile
+from main import LikelihoodBasedTextGenerator, LetterStorage, tokenize_by_letters, encode_corpus, decode_sentence
+from language_profile import LanguageProfile
 
 
 class LikelihoodBasedTextGeneratorTest(unittest.TestCase):

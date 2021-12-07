@@ -3,7 +3,7 @@ Checks the second lab getting language features function
 """
 
 import unittest
-from lab_2.main import get_language_features
+from main import get_language_features
 
 
 class GetLanguageFeaturesTest(unittest.TestCase):

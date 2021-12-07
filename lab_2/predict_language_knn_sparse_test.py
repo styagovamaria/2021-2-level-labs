@@ -4,8 +4,8 @@ Checks the second lab predicting language knn sparse function
 
 import unittest
 from mock import patch
-from lab_2.main import predict_language_knn_sparse
-from lab_2.main import calculate_distance_sparse
+from main import predict_language_knn_sparse
+from main import calculate_distance_sparse
 
 
 class PredictLanguageKnnSparseTest(unittest.TestCase):
@@ -56,7 +56,7 @@ class PredictLanguageKnnSparseTest(unittest.TestCase):
                                              language_labels, 3)
         self.assertEqual(expected, actual)
 
-    @patch('lab_2.main.calculate_distance_sparse',
+    @patch('main.calculate_distance_sparse',
            side_effect=calculate_distance_sparse)
     def test_calculate_distance_called(self, mock):
         """

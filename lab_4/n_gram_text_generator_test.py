@@ -5,8 +5,8 @@ Tests NGramTextGenerator class
 
 import unittest
 
-from lab_4.main import NGramTextGenerator, LetterStorage, tokenize_by_letters, encode_corpus, decode_sentence
-from lab_4.language_profile import LanguageProfile
+from main import NGramTextGenerator, LetterStorage, tokenize_by_letters, encode_corpus, decode_sentence
+from language_profile import LanguageProfile
 
 
 class NGramTextGeneratorTest(unittest.TestCase):

@@ -4,8 +4,8 @@ Checks the second lab predicting language score function
 
 import unittest
 from mock import patch
-from lab_2.main import predict_language_score
-from lab_2.main import calculate_distance
+from main import predict_language_score
+from main import calculate_distance
 
 
 class PredictLanguageScoreTest(unittest.TestCase):
@@ -26,7 +26,7 @@ class PredictLanguageScoreTest(unittest.TestCase):
         actual = predict_language_score(first_text_vector, second_text_vectors, language_labels)
         self.assertEqual(expected, actual)
 
-    @patch('lab_2.main.calculate_distance',
+    @patch('main.calculate_distance',
            side_effect=calculate_distance)
     def test_calculate_distance_called(self, mock):
         """

@@ -5,7 +5,7 @@ Tests for tokenize_by_letters_function
 
 import unittest
 
-from lab_4.main import tokenize_by_letters
+from main import tokenize_by_letters
 
 
 class TokenizeByLettersTest(unittest.TestCase):

@@ -3,7 +3,7 @@ Checks the second lab getting text vector function
 """
 
 import unittest
-from lab_2.main import get_text_vector
+from main import get_text_vector
 
 
 class GetTextVectorTest(unittest.TestCase):

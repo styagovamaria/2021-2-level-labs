@@ -4,9 +4,9 @@ Checks the second lab predicting language knn function
 
 import unittest
 from mock import patch
-from lab_2.main import predict_language_knn
-from lab_2.main import calculate_distance
-from lab_2.main import calculate_distance_manhattan
+from main import predict_language_knn
+from main import calculate_distance
+from main import calculate_distance_manhattan
 
 
 class PredictLanguageKnnTest(unittest.TestCase):
@@ -64,7 +64,7 @@ class PredictLanguageKnnTest(unittest.TestCase):
                                       language_labels, 2, metric='euclid')
         self.assertEqual(expected, actual)
 
-    @patch('lab_2.main.calculate_distance',
+    @patch('main.calculate_distance',
            side_effect=calculate_distance)
     def test_calculate_distance_called(self, mock):
         """
@@ -81,7 +81,7 @@ class PredictLanguageKnnTest(unittest.TestCase):
                              language_labels, 3, metric='euclid')
         self.assertTrue(mock.called)
 
-    @patch('lab_2.main.calculate_distance_manhattan',
+    @patch('main.calculate_distance_manhattan',
            side_effect=calculate_distance_manhattan)
     def test_calculate_distance_manhattan_called(self, mock):
         """
