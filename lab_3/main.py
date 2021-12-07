@@ -120,9 +120,9 @@ class LetterStorage:
         :param letter: a letter
         :return: an id
         """
-        if letter in self.storage:
+         if letter in self.storage:
             return self.storage[letter]
-        else:
+         else:
             return -1
 
     def get_letter_by_id(self, letter_id: int) -> str or int:
@@ -266,7 +266,7 @@ class NGramTrie:
         return 0
 
 
----------------------------------------------------------
+#---------------------------------------------------------
     def extract_n_grams_frequencies(self, n_grams_dictionary: dict) -> int:
         if not isinstance(n_grams_dictionary, dict):
             return 1
@@ -277,17 +277,18 @@ class NGramTrie:
         
     
     def extract_n_grams_log_probabilities(self, n_grams_dictionary: dict) -> int:
-    
+        pass
+
     def calculate_log_probabilities(self) -> int:
         """
         Gets log-probabilities of n-grams, fills the field n_gram_log_probabilities
         :return: 0 if succeeds, 1 if not
         """
     
-    class LanguageProfile:
-    """
+class LanguageProfile:
+    '''
     Stores and manages language profile information
-    """
+    '''
     def __init__(self, letter_storage: LetterStorage, language_name: str):
         self.storage = letter_storage
         self.language = language_name
