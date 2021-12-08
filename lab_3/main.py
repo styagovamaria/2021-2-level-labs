@@ -10,46 +10,81 @@ import re
 
 # 4
 def tokenize_by_sentence(text: str) -> tuple:
-    """
-    Splits a text into sentences, sentences into tokens, tokens into letters
-    Tokens are framed with '_'
-    :param text: a text
-    :return: a list of sentence with lists of tokens split into letters
-    e.g.
-    text = 'She is happy. He is happy.'
-    -->  (
-         (('_', 's', 'h', 'e', '_'), ('_', 'i', 's', '_'), ('_', 'h', 'a', 'p', 'p', 'y', '_')),
-         (('_', 'h', 'e', '_'), ('_', 'i', 's', '_'), ('_', 'h', 'a', 'p', 'p', 'y', '_'))
-         )
-    """
-    if not isinstance(text, str):
+    if not isinstance(text, str) or not text:
         return ()
-    # start level - 'sentences'
-    sentences_raw = re.split(r"[!.?]\W(?=[\wöüäßÜÖÄẞ])", text)
-    # delete empty strings
-    sentences_raw = [sentence_raw.lower().strip() for sentence_raw in sentences_raw if sentence_raw]
-    text_tuple = []
-    for sentence_raw in sentences_raw:
-        # start level - 'words'
-        words_raw = sentence_raw.split()
-        sentence_tuple = []
-        for word_raw in words_raw:
-            # start level - 'letters'
-            word_tuple = [letter for letter in word_raw if letter.isalpha()]
-            if word_tuple:
-                word_tuple.append('_')
-                word_tuple.insert(0, '_')
-            word_tuple = tuple(word_tuple)
-            # end level - 'letters'
-            sentence_tuple.append(word_tuple)
-        # end level - 'words'
-        # delete empty tuples
-        sentence_tuple = tuple(word_tuple for word_tuple in sentence_tuple if word_tuple)
-        text_tuple.append(sentence_tuple)
-    # end level - 'sentences'
-    # delete empty tuples
-    text_tuple = tuple(sentence_tuple for sentence_tuple in text_tuple if sentence_tuple)
-    return text_tuple
+    UnlautsReplacements = {
+        'ö': 'oe',
+        'ü': 'ue',
+        'ä': 'ae',
+        'ß': 'ss',
+        'Ö': 'Oe',
+        'Ü': 'Ue',
+        'Ä': 'Ae',
+        # 'ß': 'ss',
+        'ẞ': 'Ss'
+
+    }
+
+    def normalize(a):
+
+        a = a.strip()
+        a = re.sub(r"[^A-Za-z0-9\s]{1,}", '', a)
+        for x, y in UnlautsReplacements.items():
+            a = a.replace(x, y)
+        return a
+
+    text = text.replace('\r\n', ' ')
+    text = text.replace('\n', ' ')
+    text = text.replace('\t', ' ')
+    # Break Sentences properly
+    alltextstr = (text)  # list(map(normalize, f.readlines()))
+    print('alltextstr', alltextstr)
+    sentences = re.split(r"[!.?]\W(?=[\wöüäßÖÜÄẞ])", alltextstr)
+
+    sentences = re.split(r"[.!?]{1,3}[\s]{1,}(?=[\wßÜÖÄ^a-zßöüä]{1})",
+                         alltextstr)  # re.split(r"[!.?]\W(?=[\wöüäßÜÖÄẞ])", text)
+    print('sentences', sentences)
+    sentences = list(map(normalize, sentences))
+
+    # Lexemizations
+    i = 0
+    TkSentences = []
+    for sent in sentences:
+
+        print(i, ')', sent + '')
+        i += 1
+        tkSent = re.split(r'[\s]{1,}', sent)
+        tkSent2 = []
+        for word in tkSent:
+            # print('\t<',word,'>',sep='', end='    =    ')
+            if word == '':
+                continue
+            word = word.lower()
+            clearword = [symb for symb in word if symb.isalpha()]
+
+            clearword.append('_')
+            clearword.insert(0, '_')
+            clearword = tuple(clearword)
+            # print('\t<',clearword,'>',sep='')
+            tkSent2.append(clearword)
+
+        if len(tkSent2) == 0:
+            continue
+        TkSentences.append(tuple(tkSent2))
+
+    '''
+    #output
+    i=0
+    outstr = ''
+    for sent in TkSentences:
+        outstr+= str(i) + ')' + str(sent) +'\n'
+        for word in sent:
+            outstr+= '\t' + str(word)+ '\n'
+        i+=1
+
+    print(outstr)
+    '''
+    return tuple(TkSentences)
 
 
 # 4
@@ -241,34 +276,7 @@ class NGramTrie:
                 self.n_gram_frequencies[key] = value
         return 0
 
-    # 10
-    def extract_n_grams_log_probabilities(self, n_grams_dictionary: dict) -> int:
-        """
-        Extracts n_grams log-probabilities from given dictionary.
-        Fills self.n_gram_log_probabilities field.
-        """
-        if not isinstance(n_grams_dictionary, dict):
-            return 1
-        for n_gram, log_probability in n_grams_dictionary.items():
-            if isinstance(n_gram, tuple) and isinstance(log_probability, float):
-                self.n_gram_log_probabilities[n_gram] = log_probability
-        return 0
 
-    # 10
-    def calculate_log_probabilities(self) -> int:
-        """
-        Gets log-probabilities of n-grams, fills the field n_gram_log_probabilities
-        :return: 0 if succeeds, 1 if not
-        """
-        if not self.n_gram_frequencies:
-            return 1
-        for n_gram, frequency in self.n_gram_frequencies.items():
-            amount = 0
-            for n_gram_neighbour, frequency_neighbour in self.n_gram_frequencies.items():
-                if n_gram[:-1] == n_gram_neighbour[:-1]:
-                    amount += frequency_neighbour
-            self.n_gram_log_probabilities[n_gram] = math.log(frequency / amount, math.e)
-        return 0
 
 
 # 6
@@ -519,32 +527,3 @@ def calculate_probability(unknown_profile: LanguageProfile, known_profile: Langu
 
     return probability
 
-
-# 10
-class ProbabilityLanguageDetector(LanguageDetector):
-    """
-    Detects profile language using probabilities
-    """
-
-    def detect(self, unknown_profile: LanguageProfile, k: int, trie_levels: tuple) -> \
-            Dict[Tuple[str, int], int or float] or int:
-        """
-        Detects the language of an unknown profile and its probability score
-        :param unknown_profile: an instance of LanguageDetector
-        :param k: a number of the most common n-grams
-        :param trie_levels: N-gram size
-        :return: sorted language labels with corresponding ngram size and their prob scores
-        if input is correct, otherwise -1
-        """
-        if not (isinstance(unknown_profile, LanguageProfile)
-                and isinstance(k, int)
-                and isinstance(trie_levels, tuple)):
-            return -1
-        lang_probabilities = {}
-        for language, language_profile in self.language_profiles.items():
-            for trie_level in trie_levels:
-                lang_probabilities[language, trie_level] = calculate_probability(unknown_profile,
-                                                                                 language_profile,
-                                                                                 k,
-                                                                                 trie_level)
-        return lang_probabilities
