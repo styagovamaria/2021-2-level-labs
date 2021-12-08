@@ -12,7 +12,7 @@ import re
 def tokenize_by_sentence(text: str) -> tuple:
     if not isinstance(text, str) or not text:
         return ()
-    UnlautsReplacements = {
+    Un_lauts_Replacements = {
         'ö': 'oe',
         'ü': 'ue',
         'ä': 'ae',
@@ -22,15 +22,14 @@ def tokenize_by_sentence(text: str) -> tuple:
         'Ä': 'Ae',
         # 'ß': 'ss',
         'ẞ': 'Ss'
-
     }
 
     def normalize(a):
 
         a = a.strip()
         a = re.sub(r"[^A-Za-z0-9\s]{1,}", '', a)
-        for x, y in UnlautsReplacements.items():
-            a = a.replace(x, y)
+        for x_, y_ in Un_lauts_Replacements.items():
+            a = a.replace(x_, y_)
         return a
 
     text = text.replace('\r\n', ' ')
@@ -48,43 +47,30 @@ def tokenize_by_sentence(text: str) -> tuple:
 
     # Lexemizations
     i = 0
-    TkSentences = []
+    Tk_Sentences = []
     for sent in sentences:
 
         print(i, ')', sent + '')
         i += 1
-        tkSent = re.split(r'[\s]{1,}', sent)
-        tkSent2 = []
-        for word in tkSent:
+        tk_Sent = re.split(r'[\s]{1,}', sent)
+        tk_Sent2 = []
+        for word in tk_Sent:
             # print('\t<',word,'>',sep='', end='    =    ')
             if word == '':
                 continue
             word = word.lower()
             clearword = [symb for symb in word if symb.isalpha()]
-
             clearword.append('_')
             clearword.insert(0, '_')
             clearword = tuple(clearword)
             # print('\t<',clearword,'>',sep='')
-            tkSent2.append(clearword)
+            tk_Sent2.append(clearword)
 
-        if len(tkSent2) == 0:
+        if len(tk_Sent2) == 0:
             continue
-        TkSentences.append(tuple(tkSent2))
+        Tk_Sentences.append(tuple(tk_Sent2))
 
-    '''
-    #output
-    i=0
-    outstr = ''
-    for sent in TkSentences:
-        outstr+= str(i) + ')' + str(sent) +'\n'
-        for word in sent:
-            outstr+= '\t' + str(word)+ '\n'
-        i+=1
-
-    print(outstr)
-    '''
-    return tuple(TkSentences)
+    return tuple(Tk_Sentences)
 
 
 # 4
