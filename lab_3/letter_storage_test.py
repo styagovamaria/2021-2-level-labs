@@ -6,7 +6,7 @@ Tests LetterStorage class
 import unittest
 from unittest.mock import patch
 
-from main import LetterStorage
+from lab_3.main import LetterStorage
 
 
 class LetterStorageTest(unittest.TestCase):
