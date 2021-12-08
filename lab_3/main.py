@@ -47,14 +47,14 @@ def tokenize_by_sentence(text: str) -> tuple:
 
     # Lexemizations
     i = 0
-    Tk_Sentences = []
+    tk_sentences = []
     for sent in sentences:
 
         print(i, ')', sent + '')
         i += 1
-        tk_Sent = re.split(r'[\s]{1,}', sent)
-        tk_Sent2 = []
-        for word in tk_Sent:
+        tk_sent = re.split(r'[\s]{1,}', sent)
+        tk_sent2 = []
+        for word in tk_sent:
             # print('\t<',word,'>',sep='', end='    =    ')
             if word == '':
                 continue
@@ -64,13 +64,13 @@ def tokenize_by_sentence(text: str) -> tuple:
             clearword.insert(0, '_')
             clearword = tuple(clearword)
             # print('\t<',clearword,'>',sep='')
-            tk_Sent2.append(clearword)
+            tk_sent2.append(clearword)
 
-        if len(tk_Sent2) == 0:
+        if len(tk_sent2) == 0:
             continue
-        Tk_Sentences.append(tuple(tk_Sent2))
+        tk_sentences.append(tuple(tk_sent2))
 
-    return tuple(Tk_Sentences)
+    return tuple(tk_sentences)
 
 
 # 4
