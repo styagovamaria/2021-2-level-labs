@@ -5,7 +5,7 @@ Tests for Language Profile (get top frequencies)
 
 import unittest
 
-from main import NGramTrie, \
+from lab_3.main import NGramTrie, \
     LetterStorage, \
     encode_corpus, \
     LanguageProfile, \

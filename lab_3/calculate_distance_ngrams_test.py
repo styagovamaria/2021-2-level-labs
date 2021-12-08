@@ -5,7 +5,7 @@ Tests for distance calculation
 
 import unittest
 
-from main import LetterStorage, \
+from lab_3.main import LetterStorage, \
     encode_corpus, \
     LanguageProfile, \
     calculate_distance, \

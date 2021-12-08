@@ -5,7 +5,7 @@ Tests for NGramTrie (frequencies calculation)
 
 import unittest
 
-from main import NGramTrie, LetterStorage, encode_corpus, tokenize_by_sentence
+from lab_3.main import NGramTrie, LetterStorage, encode_corpus, tokenize_by_sentence
 
 
 class CalculateThreeGramFrequenciesTest(unittest.TestCase):

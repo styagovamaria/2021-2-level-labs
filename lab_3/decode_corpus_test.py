@@ -5,8 +5,8 @@ Tests decode_corpus function
 
 import unittest
 
-from main import LetterStorage
-from main import decode_corpus, encode_corpus
+from lab_3.main import LetterStorage
+from lab_3.main import decode_corpus, encode_corpus
 
 
 class DecodeCorpusTest(unittest.TestCase):
