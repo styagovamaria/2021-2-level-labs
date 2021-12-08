@@ -1,5 +1,7 @@
 #!/bin/bash
-
+pwd
+who
+set -x
 export PYTHONPATH="$(pwd)/lab_1:$(pwd)/lab_2:$(pwd)/lab_3:$(pwd)/lab_4:$(pwd):${PYTHONPATH}"
 echo "Running tests..."
 
