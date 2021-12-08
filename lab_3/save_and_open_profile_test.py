@@ -6,7 +6,7 @@ Tests for Language Profile (saving & opening)
 import os
 import unittest
 
-from main import NGramTrie, \
+from lab_3.main in import NGramTrie, \
     LetterStorage, \
     encode_corpus, \
     LanguageProfile, \
