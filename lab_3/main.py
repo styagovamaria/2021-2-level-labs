@@ -65,7 +65,6 @@ def tokenize_by_sentence(text: str) -> tuple:
         tk_sentences.append(tuple(tk_sent2))
     return tuple(tk_sentences)
 
-
 # 4
 class LetterStorage:
     """
