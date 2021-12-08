@@ -5,7 +5,7 @@ Tests for NGramTrie (n-gram log probabilities extraction)
 
 import unittest
 
-from main import NGramTrie, LetterStorage
+from lab_3.main import NGramTrie, LetterStorage
 
 
 class ExtractNgramLogProbabilitiesTest(unittest.TestCase):

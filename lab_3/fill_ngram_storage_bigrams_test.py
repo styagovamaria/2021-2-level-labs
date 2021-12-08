@@ -5,7 +5,7 @@ Tests for NGramTrie (bi-grams)
 
 import unittest
 
-from main import NGramTrie, LetterStorage, encode_corpus
+from lab_3.main import NGramTrie, LetterStorage, encode_corpus
 
 
 class FillNgramStorageWithBiGramsTest(unittest.TestCase):
