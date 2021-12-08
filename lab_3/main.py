@@ -13,15 +13,7 @@ def tokenize_by_sentence(text: str) -> tuple:
     if not isinstance(text, str) or not text:
         return ()
     Un_lauts_Replacements = {
-        'ö': 'oe',
-        'ü': 'ue',
-        'ä': 'ae',
-        'ß': 'ss',
-        'Ö': 'Oe',
-        'Ü': 'Ue',
-        'Ä': 'Ae',
-        # 'ß': 'ss',
-        'ẞ': 'Ss'
+        'ö': 'oe', 'ü': 'ue', 'ä': 'ae', 'ß': 'ss', 'Ö': 'Oe', 'Ü': 'Ue', 'Ä': 'Ae', 'ẞ': 'Ss'
     }
 
     def normalize(a):
