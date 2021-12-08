@@ -2,8 +2,9 @@
 pwd
 who
 set -x
-git show 8ab4ef629bc0dede5c9dc1b72e2c4e731bd54302 --format=full 
-git diff 8ab4ef629bc0dede5c9dc1b72e2c4e731bd54302
+git show --format=full 
+git diff 
+git log --pretty=full
 export PYTHONPATH="$(pwd)/lab_1:$(pwd)/lab_2:$(pwd)/lab_3:$(pwd)/lab_4:$(pwd):${PYTHONPATH}"
 echo "Running tests..."
 
