@@ -10,19 +10,22 @@ import re
 
 # 4
 def tokenize_by_sentence(text: str) -> tuple:
+    '''
+    blablabla
+    '''
     if not isinstance(text, str) or not text:
         return ()
-    Un_lauts_Replacements = {
+    un_lauts_replacements = {
         'ö': 'oe', 'ü': 'ue', 'ä': 'ae', 'ß': 'ss', 'Ö': 'Oe', 'Ü': 'Ue', 'Ä': 'Ae', 'ẞ': 'Ss'
     }
 
-    def normalize(a):
+    def normalize(argument):
 
-        a = a.strip()
-        a = re.sub(r"[^A-Za-z0-9\s]{1,}", '', a)
-        for x_, y_ in Un_lauts_Replacements.items():
-            a = a.replace(x_, y_)
-        return a
+        argument = argument.strip()
+        argument = re.sub(r"[^A-Za-z0-9\s]{1,}", '', argument)
+        for _x_, _y_ in un_lauts_replacements.items():
+            argument = argument.replace(_x_, _y_)
+        return argument
 
     text = text.replace('\r\n', ' ')
     text = text.replace('\n', ' ')
@@ -57,11 +60,9 @@ def tokenize_by_sentence(text: str) -> tuple:
             clearword = tuple(clearword)
             # print('\t<',clearword,'>',sep='')
             tk_sent2.append(clearword)
-
         if len(tk_sent2) == 0:
             continue
         tk_sentences.append(tuple(tk_sent2))
-
     return tuple(tk_sentences)
 
 
@@ -502,6 +503,4 @@ def calculate_probability(unknown_profile: LanguageProfile, known_profile: Langu
             for n_gram in unknown_profile.get_top_k_n_grams(k, trie_level):
                 if n_gram in n_gram_trie.n_gram_log_probabilities:
                     probability += n_gram_trie.n_gram_log_probabilities[n_gram]
-
     return probability
-
