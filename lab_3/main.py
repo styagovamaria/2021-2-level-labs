@@ -6,6 +6,7 @@ import json
 import math
 from typing import Dict, Tuple
 import re
+from os.path import exists
 
 
 # 4
@@ -503,3 +504,37 @@ def calculate_probability(unknown_profile: LanguageProfile, known_profile: Langu
                 if n_gram in n_gram_trie.n_gram_log_probabilities:
                     probability += n_gram_trie.n_gram_log_probabilities[n_gram]
     return probability
+
+def load_profile(path_to_file: str) -> dict or None:
+    """
+    Loads a language profile
+    :param path_to_file: a path
+    :return: a dictionary with three keys – name, freq, n_words
+    """
+    # check for bad input
+    if not isinstance(path_to_file, str) or not exists(path_to_file):
+        return None
+    # load profile from file
+    with open(path_to_file, "r", encoding="utf-8") as json_file:
+        profile = json.load(json_file)
+    return profile
+
+
+def save_profile(profile: dict) -> int:
+    """
+    Saves a language profile
+    :param profile: a dictionary
+    :return: 0 if everything is ok, 1 if not
+    """
+    if not isinstance(profile, dict) or ("name" or "freq" or "n_words") not in profile.keys():
+        return 1
+    if (not isinstance(profile["name"], str)
+            or not isinstance(profile["freq"], dict)
+            or not isinstance(profile["n_words"], int)):
+        return 1
+    # generate file name from profile name
+    path_to_file = "{}.json".format(profile["name"])
+    # save profile in json file
+    with open(path_to_file, "w", encoding="utf-8") as file:
+        json.dump(profile, file)
+    return 0
