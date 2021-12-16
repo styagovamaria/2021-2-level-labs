@@ -4,7 +4,7 @@ from lab_4.language_profile import LanguageProfile
 from lab_4.main import tokenize_by_letters, NGramTextGenerator
 from lab_4.main import LetterStorage, encode_corpus, LikelihoodBasedTextGenerator
 
-text = 'bla blabla'
+text = 'A serial killer is typically a person'
 
 print(tokenize_by_letters(text))
 
