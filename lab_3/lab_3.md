@@ -91,7 +91,7 @@ def tokenize_by_sentence(text: str) -> tuple:
 Буквы, указанные выше, будут храниться следующим образом:
 
 ```py
-self.storage = {..., 'a': 1, 'c': 2, ...}
+self.s = {..., 'a': 1, 'c': 2, ...}
 ```
 
 Для хранения букв и их идентификаторов необходимо создать поле класса - `storage`.  
@@ -296,12 +296,13 @@ class NGramTrie:
 
 Например, при инициализации класса `NGramTrie` c хранилищем букв и размером N-грамм равным 2,
 конструктор будет выглядеть следующим образом:
+
 ```py
 ngrams = NGramTrie(letter_storage_object, 2)
-print(ngrams.size) # 2
-print(ngrams.storage) # LetterStorage class instance
-print(ngrams.ngrams) # []
-print(ngrams.n_gram_frequencies) # {}
+print(ngrams.size)  # 2
+print(ngrams.s)  # LetterStorage class instance
+print(ngrams.ngrams)  # []
+print(ngrams.n_gram_frequencies)  # {}
 ```
 
 ### Шаг 5.2. Извлечь N-граммы из закодированного корпуса
@@ -385,12 +386,13 @@ class LanguageProfile:
     
 Например, при инициализации класса `LanguageProfile` c хранилищем букв и меткой языка `en`,
 конструктор будет выглядеть следующим образом:
+
 ```py
 en_profile = LanguageProfile(letter_storage_object, 'en')
-print(en_profile.storage) # LetterStorage class instance
-print(en_profile.language) # `en`
-print(en_profile.tries) # []
-print(en_profile.n_words) # []
+print(en_profile.s)  # LetterStorage class instance
+print(en_profile.language)  # `en`
+print(en_profile.tries)  # []
+print(en_profile.n_words)  # []
 ```
 
 ### Шаг 6.1. Заполнить языковой профиль
