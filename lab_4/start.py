@@ -22,6 +22,7 @@ print('5 lowest id literals:{}'.format( storage_list[:5]))
 print('5 higest id literals:{}'.format( storage_list[-5:]))
 
 
+
 # for 6
 encoded = encode_corpus(s, text_tok)
 

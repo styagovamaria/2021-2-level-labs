@@ -389,7 +389,6 @@ class LikelihoodBasedTextGenerator(NGramTextGenerator):
 
         return -1
 
-
 # 10
 class BackOffGenerator(NGramTextGenerator):
     """
