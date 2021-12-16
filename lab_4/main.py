@@ -54,7 +54,6 @@ def tokenize_by_letters(text: str) -> Tuple or int:
 
     return tuple(processed_tokens)
 
-
 # 4
 class LetterStorage(Storage):
     """
