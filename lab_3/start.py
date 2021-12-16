@@ -103,5 +103,4 @@ if __name__ == '__main__':
     af_profile.open(os.path.join(PATH_TO_PROFILES_FOLDER, 'af'))
 
     # DO NOT REMOVE NEXT LINE - KEEP IT INTENTIONALLY LAST
-    #assert RESULT, 'Detection not working'
-    print(it_profile.tries[2].n_gram_frequencies)
+    assert RESULT, 'Detection not working'

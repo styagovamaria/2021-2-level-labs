@@ -347,10 +347,9 @@ N-граммы. Генерация в таком случае становитс
     
 Для получения символа `_` вы можете обратиться к соответствующему
 методу вашего хранилища:
-
 ```py
 generator = NGramTextGenerator(en_profile)
-print(generator.profile.s.get_special_token_id())  # вернет вам id символа _ 
+print(generator.profile.storage.get_special_token_id())  # вернет вам id символа _ 
 ```
 
 **Интерфейс**:
