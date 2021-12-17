@@ -14,7 +14,7 @@ from lab_4.main import (
     BackOffGenerator
 )
 
-TEXT = 'A serial killer is typically a person'
+text = 'A serial killer is typically a person'
 
 print(tokenize_by_letters(text))
 
