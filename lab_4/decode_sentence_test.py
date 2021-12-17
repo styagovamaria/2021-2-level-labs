@@ -5,8 +5,8 @@ Tests decode_sentence function
 
 import unittest
 
-from main import LetterStorage
-from main import decode_sentence, encode_corpus
+from lab_4.main import LetterStorage
+from lab_4.main import decode_sentence, encode_corpus
 
 
 class DecodeSentenceTest(unittest.TestCase):
