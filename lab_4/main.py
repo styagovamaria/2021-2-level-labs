@@ -317,6 +317,7 @@ def translate_sentence_to_plain_text(decoded_corpus: tuple) -> str:
 
 
 # 8
+
 class LikelihoodBasedTextGenerator(NGramTextGenerator):
     """
     Language model for likelihood based text generation
@@ -391,6 +392,7 @@ class LikelihoodBasedTextGenerator(NGramTextGenerator):
                 return next_ngram[-1]
 
         return -1
+
 
 # 10
 class BackOffGenerator(NGramTextGenerator):
