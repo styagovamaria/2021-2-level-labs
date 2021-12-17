@@ -1,3 +1,7 @@
+"""
+Language generation starter
+"""
+
 import os
 from lab_4.main import (
     tokenize_by_letters,
@@ -6,7 +10,8 @@ from lab_4.main import (
     LanguageProfile,
     PublicLanguageProfile,
     NGramTextGenerator,
-    LikelihoodBasedTextGenerator
+    LikelihoodBasedTextGenerator,
+    BackOffGenerator
 )
 
 TEXT = 'A serial killer is typically a person'
