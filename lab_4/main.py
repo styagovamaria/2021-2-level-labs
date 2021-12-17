@@ -1,4 +1,8 @@
-
+"""
+Lab 4
+Language generation algorithm based on language profiles
+"""
+import re
 import json
 from typing import Tuple
 from lab_4.storage import Storage

@@ -26,19 +26,19 @@ if __name__ == '__main__':
 
     with open(os.path.join(PATH_TO_DATASET_FOLDER, 'known_samples_de.txt'),
               'r', encoding='utf-8') as file_to_read:
-        DE_SAMPLES = file_to_read.read().split('[TEXT]')[1:]
+        DE_SAMPLES = file_to_read.read().split('[text]')[1:]
 
     with open(os.path.join(PATH_TO_DATASET_FOLDER, 'known_samples_eng.txt'),
               'r', encoding='utf-8') as file_to_read:
-        EN_SAMPLES = file_to_read.read().split('[TEXT]')[1:]
+        EN_SAMPLES = file_to_read.read().split('[text]')[1:]
 
     with open(os.path.join(PATH_TO_DATASET_FOLDER, 'known_samples_lat.txt'),
               'r', encoding='utf-8') as file_to_read:
-        LAT_SAMPLES = file_to_read.read().split('[TEXT]')[1:]
+        LAT_SAMPLES = file_to_read.read().split('[text]')[1:]
 
     with open(os.path.join(PATH_TO_DATASET_FOLDER, 'unknown_samples.txt'),
               'r', encoding='utf-8') as file_to_read:
-        UNKNOWN_SAMPLES = file_to_read.read().split('[TEXT]')[1:]
+        UNKNOWN_SAMPLES = file_to_read.read().split('[text]')[1:]
 
     EXPECTED = ['de', 'eng', 'lat']
     stop_words = []
