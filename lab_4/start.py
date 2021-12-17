@@ -1,10 +1,15 @@
-from lab_4.main import tokenize_by_letters
-from lab_4.main import  LetterStorage
-from lab_4.language_profile import LanguageProfile
-from lab_4.main import tokenize_by_letters, NGramTextGenerator
-from lab_4.main import LetterStorage, encode_corpus, LikelihoodBasedTextGenerator
+import os
+from lab_4.main import (
+    tokenize_by_letters,
+    encode_corpus,
+    LetterStorage,
+    LanguageProfile,
+    PublicLanguageProfile,
+    NGramTextGenerator,
+    LikelihoodBasedTextGenerator
+)
 
-text = 'A serial killer is typically a person'
+TEXT = 'A serial killer is typically a person'
 
 print(tokenize_by_letters(text))
 
