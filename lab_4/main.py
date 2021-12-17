@@ -1,8 +1,4 @@
-"""
-Lab 4
-Language generation algorithm based on language profiles
-"""
-import re
+
 import json
 from typing import Tuple
 from lab_4.storage import Storage
@@ -57,6 +53,7 @@ def tokenize_by_letters(text: str) -> Tuple or int:
             processed_tokens.append(tuple(processed_characters))
 
     return tuple(processed_tokens)
+
 
 # 4
 class LetterStorage(Storage):
@@ -317,7 +314,6 @@ def translate_sentence_to_plain_text(decoded_corpus: tuple) -> str:
 
 
 # 8
-
 class LikelihoodBasedTextGenerator(NGramTextGenerator):
     """
     Language model for likelihood based text generation

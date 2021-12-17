@@ -37,17 +37,17 @@ print('5 higest id literals:{}'.format( storage_list[-5:]))
 encoded = encode_corpus(s, text_tok)
 
 profile = LanguageProfile(s, 'en')
-#profile.create_from_tokens(encoded, (2,))
-profile.create_from_tokens(encoded, (2,))
+
+profile.create_from_tokens(encoded, (1,2,))
 
 text_generator = NGramTextGenerator(profile)
 sentences = []
 words=[]
-for word_lenght in range(2,8):
+for word_lenght in range(5,10):
     words.append(text_generator.generate_decoded_sentence((2,),word_lenght))
 
 
-for sentence_length in range(5, 20):
+for sentence_length in range(5, 10):
     sentences.append(text_generator.generate_decoded_sentence((1,), sentence_length))
 
 for sentence in sentences:
