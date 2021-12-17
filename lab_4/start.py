@@ -34,7 +34,7 @@ text_generator = NGramTextGenerator(profile)
 sentences = []
 words=[]
 for word_lenght in range(2,8):
-    words.append(text_generator._generate_word((2,),word_lenght))
+    words.append(text_generator.generate_decoded_sentence((2,),word_lenght))
 
 
 for sentence_length in range(5, 20):
