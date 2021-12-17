@@ -16,7 +16,7 @@ from lab_4.main import (
 
 TEXT = 'A serial killer is typically a person'
 
-print(tokenize_by_letters(text))
+print(tokenize_by_letters(TEXT))
 
 with open('reference_text.txt', 'r', encoding='utf-8') as f:
     text_from_file = f.read()
