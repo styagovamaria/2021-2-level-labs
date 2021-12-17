@@ -1,3 +1,7 @@
+"""
+Lab 4
+Language generation algorithm based on language profiles
+"""
 
 import json
 from typing import Tuple
