@@ -6,7 +6,7 @@ Tests Storage class
 import unittest
 from unittest.mock import patch
 
-from storage import Storage
+from lab_4.storage import Storage
 
 
 class StorageTest(unittest.TestCase):
